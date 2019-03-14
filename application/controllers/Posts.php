@@ -39,7 +39,22 @@ class Posts extends CI_Controller {
         $this->Post_model->create_post();
         redirect('posts');
       }
+    }
 
+    public function delete($id){
+      $this->Post_model->delete_post($id);
+      redirect('posts');
+    }
 
+    public function edit($id){
+      $this->form_validation->set_rules('title', 'Title', 'required');
+      $this->form_validation->set_rules('content', 'Content', 'required');
+
+      if ($this->form_validation->run() === FALSE) {
+        redirect($_SERVER['HTTP_REFERER']);
+      } else {
+        $this->Post_model->edit_post($id);
+        redirect('posts');
+      }
     }
 }

@@ -5,9 +5,8 @@
       </div>
       <div class="col-sm-6 col-md-4 col-lg-2">
         <div class="float-right">
-          <a href="<?php echo base_url('/posts/create'); ?>" class="btn btn-danger"> Create Post</a>
+          <a href="<?php echo base_url('/posts/create'); ?>" class="btn btn-success"> Create Post</a>
         </div>
-
       </div>
 
       <?php foreach ($posts as $key => $post): ?>

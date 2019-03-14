@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['posts/edit'] = 'posts/edit';
+$route['posts/delete'] = 'posts/delete';
 $route['posts/create'] = 'posts/create';
 $route['posts/(:any)'] = 'posts/view/$1';
 $route['posts'] = 'posts/index';

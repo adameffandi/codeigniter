@@ -25,4 +25,21 @@
 
       return $this->db->insert('posts', $data);
     }
+
+    public function delete_post($id){
+      $this->db->where('id', $id);
+      return $this->db->delete('posts');
+    }
+
+    public function edit_post($id){
+      $this->db->where('id', $id);
+      
+      $slug = url_title($this->input->post('title'));
+      $data = array(
+        'title' => $this->input->post('title'),
+        'slug' => $slug,
+        'content' => $this->input->post('content')
+      );
+      return $this->db->replace('posts', $data);
+    }
   }
