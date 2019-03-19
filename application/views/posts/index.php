@@ -10,8 +10,16 @@
       </div>
 
       <?php foreach ($posts as $key => $post): ?>
-        <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="row post-item-index">
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <?php if (!empty($post['post_image'])): ?>
+              <img src="<?php echo site_url(); ?>public/img/posts/<?php echo $post['post_image']; ?>" alt="" class="img-responsive blog-preview-img">
+            <?php else: ?>
+              <img src="<?php echo site_url(); ?>public/img/placeholder.jpg ?>" alt="" class="img-responsive blog-preview-img">
+            <?php endif; ?>
+
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-8">
             <div class="post-item">
               <h3><?php echo $post['title']; ?></h3>
               <p class="text-info">

@@ -34,6 +34,10 @@ p {
   padding: 20px;
 }
 
+.post-item-index {
+  margin-bottom: 40px;
+}
+
 .button-section {
   position: relative;
   display: block;
@@ -43,6 +47,11 @@ p {
   position: absolute;
   top: 0;
   left: 100px;
+}
+
+.blog-preview-img {
+  width: 100%;
+  height: 100%;
 }
 
 .category-box {

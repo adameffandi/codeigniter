@@ -13,7 +13,7 @@
           <p><?php echo $post['content']; ?></p>
         </div>
         <div id="view-edit-form">
-          <?php echo form_open('/posts/edit/'.$post['id']); ?>
+          <?php echo form_open_multipart('/posts/edit/'.$post['id']); ?>
             <div class="form-group row">
               <label for="title" class="form-label col-sm-12 col-md-2 col-lg-2">Title</label>
               <div class="col-sm-12 col-md-10 col-lg-10">
@@ -45,6 +45,12 @@
               <label for="content" class="form-label col-sm-12 col-md-2 col-lg-2">Content</label>
               <div class="col-sm-12 col-md-10 col-lg-10">
                 <textarea name="content" class="form-control" rows="5" cols="100" required><?php echo $post['content'] ?></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="postimage" class="form-label col-sm-12 col-md-2 col-lg-2">Image</label>
+              <div class="col-sm-12 col-md-10 col-lg-10">
+                <input type="file" name="postimage" class="form-control">
               </div>
             </div>
             <div class="form-group row">

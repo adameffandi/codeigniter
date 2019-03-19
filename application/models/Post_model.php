@@ -20,13 +20,14 @@
       return $query->result_array();
     }
 //==================================
-    public function create_post(){
+    public function create_post($post_image){
       $slug = url_title($this->input->post('title'));
       $data = array(
         'title' => $this->input->post('title'),
         'category_id' => $this->input->post('category'),
         'slug' => $slug,
         'content' => $this->input->post('content'),
+        'post_image' => $post_image,
         'created_at' => date('Y-m-d')
       );
       return $this->db->insert('posts', $data);
@@ -37,13 +38,14 @@
       return $this->db->delete('posts');
     }
 //==================================
-    public function edit_post($id){
+    public function edit_post($id, $post_image){
       $slug = url_title($this->input->post('title'));
       $data = array(
         'title' => $this->input->post('title'),
         'category_id' => $this->input->post('category'),
         'slug' => $slug,
         'content' => $this->input->post('content'),
+        'post_image' => $post_image,
         'created_at' => date('Y-m-d')
       );
 
