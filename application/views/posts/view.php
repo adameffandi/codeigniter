@@ -14,11 +14,31 @@
         </div>
         <div id="view-edit-form">
           <?php echo form_open('/posts/edit/'.$post['id']); ?>
-            <input type="hidden" name="slug" value="<?php $post['slug']; ?>">
             <div class="form-group row">
               <label for="title" class="form-label col-sm-12 col-md-2 col-lg-2">Title</label>
               <div class="col-sm-12 col-md-10 col-lg-10">
                 <input type="text" class="form-control" name="title" required value="<?php echo $post['title'] ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="title" class="form-label col-sm-12 col-md-2 col-lg-2">Category</label>
+              <div class="col-sm-12 col-md-10 col-lg-10">
+                <select class="form-control" name="category">
+                  <optgroup label="Currently selected">
+                    <option value="$post['category_id']">
+                      <?php foreach ($categories as $key => $category): ?>
+                        <?php if ($category['id'] == $post['category_id']): ?>
+                          <?= $category['category_name']; ?>
+                        <?php endif; ?>
+                      <?php endforeach; ?>
+                    </option>
+                  </optgroup>
+                  <optgroup label="Options">
+                    <?php foreach ($categories as $key => $category): ?>
+                      <option value="<?= $category['id'] ?>"><?= $category['category_name'] ?></option>
+                    <?php endforeach; ?>
+                  </optgroup>
+                </select>
               </div>
             </div>
             <div class="form-group row">

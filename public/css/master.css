@@ -29,6 +29,8 @@ p {
 
 .post-item {
   display: block;
+  min-width: 100%;
+  width: 100%;
   padding: 20px;
 }
 
@@ -41,4 +43,24 @@ p {
   position: absolute;
   top: 0;
   left: 100px;
+}
+
+.category-box {
+  background-color: #ddd;
+  padding: 30px 50px 30px 50px;
+  /* margin: 10px; */
+  /* width: 100%;
+  min-width: 100%;
+  max-width: 100%; */
+  display: block;
+  text-align: center;
+}
+
+.tint {
+  width: 100%;
+  height: 100%;
+}
+
+.category-box:hover {
+  background-color: #ccc;
 }

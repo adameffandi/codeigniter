@@ -4,12 +4,18 @@
   	<title>CodeIgniter</title>
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/master.css">
+
+    <!-- jquery -->
     <script
       src="http://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous">
     </script>
+
+    <!-- ckeditor -->
+    <script src="//cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
   </head>
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
       <a class="navbar-brand" href="<?php echo base_url(); ?>">Navbar</a>
@@ -23,13 +29,16 @@
             <a class="nav-link" href="<?php echo base_url(); ?>">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url(); ?>/about">About</a>
+            <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url(); ?>/posts">Posts</a>
+            <a class="nav-link" href="<?php echo base_url(); ?>posts">Posts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url(); ?>categories">Categories</a>
           </li>
         </ul>
-        <a class="nav-link" href="<?php echo base_url('/posts/create'); ?>/posts">Create Post</a>
+        <!-- <a class="nav-link" href="<?php echo base_url('/posts/create'); ?>/posts">Create Post</a> -->
 
         <!-- <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

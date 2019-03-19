@@ -3,7 +3,7 @@
     public function __construct(){
       $this->load->database();
     }
-
+//==================================
     public function get_posts($slug = FALSE){
       if ($slug === FALSE) {
         $this->db->order_by('id', 'DESC');
@@ -14,32 +14,41 @@
       $query = $this->db->get_where('posts', array('slug' => $slug));
       return $query->row_array();
     }
-
+//==================================
+    public function get_categories(){
+      $query = $this->db->get('categories');
+      return $query->result_array();
+    }
+//==================================
     public function create_post(){
       $slug = url_title($this->input->post('title'));
       $data = array(
         'title' => $this->input->post('title'),
+        'category_id' => $this->input->post('category'),
         'slug' => $slug,
-        'content' => $this->input->post('content')
+        'content' => $this->input->post('content'),
+        'created_at' => date('Y-m-d')
       );
-
       return $this->db->insert('posts', $data);
     }
-
+//==================================
     public function delete_post($id){
       $this->db->where('id', $id);
       return $this->db->delete('posts');
     }
-
+//==================================
     public function edit_post($id){
-      $this->db->where('id', $id);
-      
       $slug = url_title($this->input->post('title'));
       $data = array(
         'title' => $this->input->post('title'),
+        'category_id' => $this->input->post('category'),
         'slug' => $slug,
-        'content' => $this->input->post('content')
+        'content' => $this->input->post('content'),
+        'created_at' => date('Y-m-d')
       );
-      return $this->db->replace('posts', $data);
+
+      $this->db->where('id', $id);
+      return $this->db->update('posts', $data);
     }
+//==================================
   }

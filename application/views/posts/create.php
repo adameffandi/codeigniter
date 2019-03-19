@@ -19,6 +19,16 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="title" class="form-label col-sm-12 col-md-2 col-lg-2">Category</label>
+            <div class="col-sm-12 col-md-10 col-lg-10">
+              <select class="form-control" name="category">
+                <?php foreach ($categories as $key => $category): ?>
+                  <option value="<?= $category['id'] ?>"><?= $category['category_name'] ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="content" class="form-label col-sm-12 col-md-2 col-lg-2">Content</label>
             <div class="col-sm-12 col-md-10 col-lg-10">
               <textarea name="content" class="form-control" rows="5" cols="100"></textarea>
