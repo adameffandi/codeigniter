@@ -38,6 +38,7 @@
             <a class="nav-link" href="<?php echo base_url(); ?>categories">Categories</a>
           </li>
         </ul>
+        <a href="<?php echo base_url(); ?>users" class="btn btn-outline-primary my-2 my-sm-0">Login/Register</a>
         <!-- <a class="nav-link" href="<?php echo base_url('/posts/create'); ?>/posts">Create Post</a> -->
 
         <!-- <form class="form-inline my-2 my-lg-0">

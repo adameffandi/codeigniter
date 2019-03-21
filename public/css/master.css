@@ -54,6 +54,12 @@ p {
   height: 100%;
 }
 
+.blog-img {
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+}
+
 .category-box {
   background-color: #ddd;
   padding: 30px 50px 30px 50px;
@@ -72,4 +78,9 @@ p {
 
 .category-box:hover {
   background-color: #ccc;
+}
+
+.comments-section {
+  margin-top: 40px;
+  padding: 30px 10px 30px 10px;
 }

@@ -14,6 +14,10 @@ class Posts extends CI_Controller {
     public function view($slug = NULL){
       $data['post'] = $this->Post_model->get_posts($slug);
       $data['categories'] = $this->Post_model->get_categories();
+      $post_id = $data['post']['id'];
+      $data['comments'] = $this->Comment_model->get_comment($post_id);
+      // print_r($data['comments']);
+      // die();
 
       if (empty($data['post'])) {
         show_404();
@@ -38,22 +42,21 @@ class Posts extends CI_Controller {
         $this->load->view('posts/create', $data);
         $this->load->view('templates/footer');
       } else {
-        $config['upload_path'] = './public/img/posts/';
+        $config['upload_path'] = './public/img/';
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
-        $config['max_size'] = '2048';
+        $config['max_size'] = '2048000';
         $config['max_width'] = '500';
         $config['max_height'] = '500';
 
         $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload('postimage')) {
+        if (!$this->upload->do_upload()) {
+          $errors = array('error' => $this->upload->display_errors());
+          $post_image = 'placeholder.jpg';
+        } else {
           $data = array('upload_data' => $this->upload->data());
           $post_image = $_FILES['postimage']['name'];
-        } else {
-          $errors = array('error' => $this->upload->display_errors());
-          $post_image = 'noimage.jpg';
         }
-
         $this->Post_model->create_post($post_image);
         redirect('posts');
       }
@@ -71,20 +74,20 @@ class Posts extends CI_Controller {
       if ($this->form_validation->run() === FALSE) {
         redirect($_SERVER['HTTP_REFERER']);
       } else {
-        $config['upload_path'] = './public/img/posts/';
+        $config['upload_path'] = './public/img/';
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
-        $config['max_size'] = '2048';
+        $config['max_size'] = '2048000';
         $config['max_width'] = '500';
         $config['max_height'] = '500';
 
         $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload('postimage')) {
-          $data = array('upload_data' => $this->upload->data());
-          $post_image = $_FILES['postimage']['name'];
-        } else {
+        if (!$this->upload->do_upload()) {
           $errors = array('error' => $this->upload->display_errors());
-          $post_image = 'noimage.jpg';
+          $post_image = 'placeholder.jpg';
+        } else {
+          $data = array('upload_data' => $this->upload->data());
+          $post_image = $_FILES['editpostimage']['name'];
         }
 
         $this->Post_model->edit_post($id, $post_image);
