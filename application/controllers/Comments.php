@@ -10,12 +10,14 @@ class Comments extends CI_Controller {
       redirect('categories');
     } else {
       $this->Comment_model->create_comment($id);
+      $this->session->set_flashdata('success', 'Comment successfully posted!');
       redirect($_SERVER['HTTP_REFERER']);
     }
   }
 
   public function delete($id){
     $this->Comment_model->delete_comment($id);
+    $this->session->set_flashdata('success', 'Comment successfully deleted!');
     redirect('posts');
   }
 
@@ -27,6 +29,7 @@ class Comments extends CI_Controller {
       redirect($_SERVER['HTTP_REFERER']);
     } else {
       $this->Comment_model->edit_category($id);
+      $this->session->set_flashdata('success', 'Comment successfully edited!');
       redirect('categories');
     }
   }

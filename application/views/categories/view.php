@@ -28,7 +28,11 @@
           <?php echo form_open('/categories/delete/'.$categories['id'], 'id="deleteForm"'); ?>
             <button type="submit" class="btn btn-danger" id="deleteFormBtn">Delete</button>
           </form>
-          <button type="button" name="Edit" class="btn btn-success" id="editCategoryButton">Edit Category</button>
+          <?php if (!$this->session->userdata('logged_in')): ?>
+            <button type="button" name="Edit" class="btn btn-success" id="editCategoryButton" disabled>Edit Category</button>
+          <?php else: ?>
+            <button type="button" name="Edit" class="btn btn-success" id="editCategoryButton">Edit Category</button>
+          <?php endif; ?>
         </div>
       </div>
     </div>

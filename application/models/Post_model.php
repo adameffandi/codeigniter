@@ -4,7 +4,10 @@
       $this->load->database();
     }
 //==================================
-    public function get_posts($slug = FALSE){
+    public function get_posts($slug = FALSE, $limit = FALSE, $offset = FALSE){
+      if ($limit) {
+        $this->db->limit($limit, $offset);
+      }
       if ($slug === FALSE) {
         $this->db->order_by('id', 'DESC');
         $query = $this->db->get('posts');
@@ -23,6 +26,7 @@
     public function create_post($post_image){
       $slug = url_title($this->input->post('title'));
       $data = array(
+        'user_id' => $this->session->userdata('user_id'),
         'title' => $this->input->post('title'),
         'category_id' => $this->input->post('category'),
         'slug' => $slug,

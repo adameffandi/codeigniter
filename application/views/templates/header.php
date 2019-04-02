@@ -38,7 +38,12 @@
             <a class="nav-link" href="<?php echo base_url(); ?>categories">Categories</a>
           </li>
         </ul>
-        <a href="<?php echo base_url(); ?>users" class="btn btn-outline-primary my-2 my-sm-0">Login/Register</a>
+        <?php if (!$this->session->userdata('logged_in')): ?>
+          <a href="<?php echo base_url(); ?>users" class="btn btn-outline-primary my-2 my-sm-0">Login/Register</a>
+        <?php else: ?>
+          <a href="<?php echo base_url(); ?>/users/logout" class="btn btn-outline-danger my-2 my-sm-0">Logout</a>
+        <?php endif; ?>
+
         <!-- <a class="nav-link" href="<?php echo base_url('/posts/create'); ?>/posts">Create Post</a> -->
 
         <!-- <form class="form-inline my-2 my-lg-0">
@@ -50,3 +55,18 @@
 
     <div class="main-div">
       <div class="container-fluid">
+        <!-- Flash message -->
+        <div class="flash-message-section">
+          <?php if ($this->session->flashdata('success')): ?>
+            <?php echo '<p class="alert alert-success">'.$this->session->flashdata('success').'</p>'; ?>
+          <?php endif; ?>
+          <?php if ($this->session->flashdata('danger')): ?>
+            <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('danger').'</p>'; ?>
+          <?php endif; ?>
+          <?php if ($this->session->flashdata('check_username_exists')): ?>
+            <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('check_username_exists').'</p>'; ?>
+          <?php endif; ?>
+          <?php if ($this->session->flashdata('check_email_exists')): ?>
+            <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('check_email_exists').'</p>'; ?>
+          <?php endif; ?>
+        </div>

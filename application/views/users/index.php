@@ -2,7 +2,11 @@
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="text-center">
-          
+
+          <div class="col-sm-6 col-md-8 col-lg-10">
+            <h1 class="page-title"><?= $title ?></h1>
+          </div>
+
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item" role="presentation">
               <a class="nav-link active" data-toggle="tab" id="user-login" aria-controls="login" role="tab">Login</a>
@@ -15,7 +19,7 @@
           <div id="myTabContent" class="tab-content">
             <div class="tab-pane active" id="login" role="tabpanel">
               <br>
-              <?php echo form_open('/users/register'); ?>
+              <?php echo form_open('/users/login'); ?>
                 <div class="form-group row">
                   <label for="username" class="form-label col-sm-12 col-md-2 col-lg-2">Username</label>
                   <div class="col-sm-12 col-md-10 col-lg-10">
@@ -62,6 +66,12 @@
                   <label for="password" class="form-label col-sm-12 col-md-2 col-lg-2">Password</label>
                   <div class="col-sm-12 col-md-10 col-lg-10">
                     <input type="password" class="form-control" name="password" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="password2" class="form-label col-sm-12 col-md-2 col-lg-2">Confirm Password</label>
+                  <div class="col-sm-12 col-md-10 col-lg-10">
+                    <input type="password" class="form-control" name="password2" required>
                   </div>
                 </div>
                 <div class="form-group row">

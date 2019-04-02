@@ -10,26 +10,91 @@ class Users extends CI_Controller {
   }
 
   public function register(){
-    $this->form_validation->set_rules('name', 'name', 'required');
-    $this->form_validation->set_rules('username', 'username', 'required');
-    $this->form_validation->set_rules('email', 'email', 'required');
-    $this->form_validation->set_rules('password', 'password', 'required');
+    //check login
+    if ($this->session->userdata('logged_in')) {
+      $this->session->set_flashdata('danger', 'You are already logged in.');
+      redirect('/users');
+    }
+
+    $this->form_validation->set_rules('name', 'Name', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
+    $this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists');
+    $this->form_validation->set_rules('password', 'Password', 'required');
+    $this->form_validation->set_rules('password2', 'Confirm password', 'matches[password]');
 
     if ($this->form_validation->run() === FALSE) {
-      redirect('/');
+      $data['title'] = 'Register & Login';
+      $this->session->set_flashdata('danger', 'Registration failed. Please try again.');
+      redirect('/users');
     } else {
-      $this->User_model->create_user($id);
-      redirect($_SERVER['HTTP_REFERER']);
+      $this->User_model->register();
+      $this->session->set_flashdata('success', 'You are now registered and can log in');
+      redirect('/');
     }
   }
 
   public function login(){
-    $data['title'] = 'Latest Posts';
+    //check login
+    if ($this->session->userdata('logged_in')) {
+      $this->session->set_flashdata('danger', 'You are already logged in.');
+      redirect('/users');
+    }
 
-    $data['posts'] = $this->User_model->get_posts();
+    $this->form_validation->set_rules('username', 'username', 'required');
+    $this->form_validation->set_rules('password', 'password', 'required');
 
-    $this->load->view('templates/header');
-    $this->load->view('posts/index', $data);
-    $this->load->view('templates/footer');
+    if ($this->form_validation->run() === FALSE) {
+      $data['title'] = 'Register & Login';
+      $this->session->set_flashdata('danger', 'Login failed. Please try again.');
+      redirect('/users');
+    } else {
+      $username = $this->input->post('username');
+      $password = md5($this->input->post('password'));
+      $user_id = $this->User_model->login($username, $password);
+
+      if ($user_id) {
+        // create session
+        $user_data = array(
+          'user_id' => $user_id,
+          'username' =>$username,
+          'logged_in' => true
+        );
+
+        $this->session->set_userdata($user_data);
+
+        $this->session->set_flashdata('success', 'You are now logged in');
+        redirect('/users');
+      } else {
+        $this->session->set_flashdata('danger', 'Invalid log in');
+        redirect('/users');
+      }
+    }
+  }
+
+  public function logout(){
+    $this->session->unset_userdata('logged_in');
+    $this->session->unset_userdata('user_id');
+    $this->session->unset_userdata('username');
+
+    $this->session->set_flashdata('success', 'Successfully logged out');
+    redirect('/users');
+  }
+
+  public function check_username_exists($username){
+    $this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one.');
+    if ($this->User_model->check_username_exists($username)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function check_email_exists($email){
+    $this->form_validation->set_message('check_email_exists', 'That email is taken. Please choose a different one.');
+    if ($this->User_model->check_email_exists($email)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

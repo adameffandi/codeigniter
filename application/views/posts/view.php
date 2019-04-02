@@ -77,9 +77,14 @@
 
         <div class="button-section">
           <?php echo form_open('/posts/delete/'.$post['id'], 'id="deleteForm"'); ?>
-            <button type="submit" name="submit" class="btn btn-danger" id="deleteFormBtn" >Delete Post</button>
+            <?php if ($this->session->userdata('logged_in') && $this->session->userdata('logged_in') == $post['user_id']): ?>
+              <button type="submit" name="submit" class="btn btn-danger" id="deleteFormBtn" >Delete Post</button>
+            <?php endif; ?>
           </form>
-          <button type="button" name="edit" class="btn btn-info" id="editForm">Edit Post</button>
+          <?php if ($this->session->userdata('logged_in') && $this->session->userdata('logged_in') == $post['user_id']): ?>
+            <button type="button" name="edit" class="btn btn-info" id="editForm">Edit Post</button>
+          <?php endif; ?>
+
         </div>
 
       </div>

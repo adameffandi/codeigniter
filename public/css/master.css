@@ -23,6 +23,10 @@ p {
   }
 }
 
+.flash-message-section {
+  margin-top: 20px;
+}
+
 .page-title{
   margin-bottom: 30px;
 }
@@ -83,4 +87,22 @@ p {
 .comments-section {
   margin-top: 40px;
   padding: 30px 10px 30px 10px;
+}
+
+.pagination-link {
+  margin: 30px 0px;
+}
+
+.pagination-link strong{
+  padding: 8px 13px;
+  margin: 5px;
+  background-color: #444;
+  border: 1px #ccc solid;
+}
+
+a.pagination-link{
+  padding: 8px 13px;
+  margin: 5px;
+  background-color: #f4f4f4;
+  border: 1px #ccc solid;
 }
